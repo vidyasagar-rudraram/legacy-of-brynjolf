@@ -9,6 +9,8 @@ If you provide a file name which is existing in the current path:
 - The input file which actually contains the blueprint of Room.
 If you do not provide any file name (as it is optional)
 - You will be asked to enter any file name to process or you can hit enter to go further (here you can be processed with already pre-defined "room.txt" file). And it will provide one of the possible solutions/path to reach the exit.
+And even if you pass any file with Room blueprint:
+- it will check for Brynjolf, Guards and Exit co-ordinates. It'll exit from the process if the room blueprint doesn't find Brynjolf or Exit co-ordinates.
 
 Here you can give any input to try it on your own to give an escape route to the legendary Brynjolf or let your algorithm do the magic by hitting enter with empty input.
 
