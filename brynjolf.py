@@ -19,6 +19,18 @@ class Brynjolf:
         self.sol_path = ""
         self.inp_sol_path = ""
 
+    def printRoom(self):
+        print ("Room:")
+        for row in self.room:
+            print(row)
+
+
+    def printSolution(self):
+        print ("Solution:")
+        for row in self.solution:
+            print(row)
+
+
     def in_boundaries(self, x, y):
         if x >= 0 and y >= 0 and x < self.SIZE and y < self.SIZE:
             return True
@@ -87,24 +99,36 @@ class Brynjolf:
                     self.sol_path = self.sol_path + 'r'
                     self.move_guard(0, 1)
                     # print("--------")
+                    # print (self.sol_path)
+                    # self.printRoom()
+                    # self.printSolution()
                     return True
                 # going left
                 if self.solve_room(sx, sy - 1):
                     self.sol_path = self.sol_path + 'l'
                     self.move_guard(0, -1)
                     # print("--------")
+                    # print (self.sol_path)
+                    # self.printRoom()
+                    # self.printSolution()
                     return True
                 # going up
                 if self.solve_room(sx - 1, sy):
                     self.sol_path = self.sol_path + 'u'
                     self.move_guard(-1, 0)
                     # print("--------")
+                    # print (self.sol_path)
+                    # self.printRoom()
+                    # self.printSolution()
                     return True
                 # going down
                 if self.solve_room(sx + 1, sy):
                     self.sol_path = self.sol_path + 'd'
                     self.move_guard(1, 0)
                     # print("--------")
+                    # print (self.sol_path)
+                    # self.printRoom()
+                    # self.printSolution()
                     return True
                 # backtracking
                 self.steps -= 1
@@ -128,7 +152,7 @@ class Brynjolf:
         '''
         if self.room[wx][wy] == "E":
             self.room[self.x][self.y] = 0
-            self.solution[wx][wy] = 1
+            self.solution[wx][wy] = 2
             return True
         '''
             checking if we can visit in this block or not

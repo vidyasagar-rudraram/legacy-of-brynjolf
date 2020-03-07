@@ -33,18 +33,18 @@ def print_solution():
 
 
 def call_solve_room(path=None):
-    global sol_path
     key = path if path else "r"
     (px, py) = path_dict[key]
     tx = x + px
     ty = y + py
     if (b.solve_room(tx, ty)):
-        sol_path = b.sol_path + key
+        b.sol_path = b.sol_path + key
         b.move_guard(px, py)
         print ("---------------")
+        print (b.sol_path)
         print_room()
         print_solution()
-        print ("Path: ", sol_path, "steps", steps)
+        print ("Path: ", b.sol_path, "steps", steps)
         return True
     else:
         print ("---------------")
@@ -79,7 +79,7 @@ if (path_list and len(path_list) > 0):
                     is_stuck = True
                     break
         if not is_stuck:
-            print ("sol_path", sol_path)
+            print ("sol_path", b.sol_path)
         else:
             print("You are stuck!", "steps", steps)
     else:

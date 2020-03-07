@@ -3,7 +3,7 @@
 
 To run/execute the program, type below command in the command line:
 ```
-$ python main.py < room.txt(optional file name) >
+$ python3 main.py < room.txt(optional file name) >
 ```
 If you provide a file name which is existing in the current path:
 - The input file which actually contains the blueprint of the Room containing the guards and exit (may be).
