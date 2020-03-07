@@ -16,7 +16,7 @@ class Room:
                 room.append(line)
 
         self.room = room
-        self.brynzolf = (self.x, self.y) = self.getBrynzolf()
+        self.brynjolf = (self.x, self.y) = self.getBrynjolf()
         self.guards = self.getGuards()
         self.exit = (self.ex, self.ey) = self.getExit()
 
@@ -24,11 +24,11 @@ class Room:
         for row in self.room:
             print (row)
 
-    def getBrynzolf(self):
-        brynzolf = find_character_index(self.room, "B")
-        if len(brynzolf) > 0:
-            return brynzolf[0]
-        print ("Brynzolf was not in the Room")
+    def getBrynjolf(self):
+        brynjolf = find_character_index(self.room, "B")
+        if len(brynjolf) > 0:
+            return brynjolf[0]
+        print ("Brynjolf was not in the Room")
         sys.exit()
 
     def getGuards(self):
