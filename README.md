@@ -1,16 +1,18 @@
 # Legacy Of Brynjolf
 
 
-To run execute the program, type below command in the command line:
+To run/execute the program, type below command in the command line:
 ```
 $ python main.py < room.txt(optional file name) >
 ```
 If you provide a file name which is existing in the current path:
-- The input file which actually contains the blueprint of Room.
+- The input file which actually contains the blueprint of the Room containing the guards and exit (may be).
+
 If you do not provide any file name (as it is optional)
 - You will be asked to enter any file name to process or you can hit enter to go further (here you can be processed with already pre-defined "room.txt" file). And it will provide one of the possible solutions/path to reach the exit.
+
 And even if you pass any file with Room blueprint:
-- it will check for Brynjolf, Guards and Exit co-ordinates. It'll exit from the process if the room blueprint doesn't find Brynjolf or Exit co-ordinates.
+- Defined functions in Room class will check for Brynjolf, Guards and Exit co-ordinates. If the given room blueprint doesn't consist Brynjolf or Exit co-ordinates, it'll exit from the process.
 
 Here you can give any input to try it on your own to give an escape route to the legendary Brynjolf or let your algorithm do the magic by hitting enter with empty input.
 
