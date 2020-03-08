@@ -8,7 +8,7 @@ class Room:
 
     def __init__(self, filePath):
         while not os.path.exists(filePath):
-            filePath = input("File doesn't exist in the path. Please try again with file name:")
+            filePath = input("File doesn't exist in the path. Please try again with another file name: ")
         room = []
 
         with open(filePath) as textFile:

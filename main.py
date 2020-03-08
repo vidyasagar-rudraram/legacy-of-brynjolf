@@ -14,6 +14,9 @@ except IndexError:
 r = Room(filePath)
 (x, y) = r.brynjolf
 b = Brynjolf(r.room, r.brynjolf, r.guards, r.exit)
+print ("brynjolf", b.brynjolf)
+print ("guards", b.guards)
+print ("exit", b.exit)
 solution = b.solution
 steps = b.steps
 sol_path = b.sol_path
@@ -32,33 +35,13 @@ def print_solution():
         print(s)
 
 
-def call_solve_room(path=None):
-    key = path if path else "r"
-    (px, py) = path_dict[key]
-    tx = x + px
-    ty = y + py
-    if (b.solve_room(tx, ty)):
-        b.sol_path = b.sol_path + key
-        b.move_guard(px, py)
-        print ("---------------")
-        print (b.sol_path)
-        print_room()
-        print_solution()
-        print ("Path: ", b.sol_path, "steps", steps)
-        return True
-    else:
-        print ("---------------")
-        print_room()
-        print_solution()
-        print("You are stuck!", "steps", steps)
-        return False
-
-# call_solve_room()
-# b.solve_room(x, y)
 room = b.room
+print_room()
 
 path_string = input("Enter the path (Example: lrud): ")
 path_list = [i.lower() for i in list(path_string)]
+
+# print_room()
 
 if (path_list and len(path_list) > 0):
     if "l" in path_list or "r" in path_list or "u" in path_list or "d" in path_list:
@@ -68,21 +51,23 @@ if (path_list and len(path_list) > 0):
                 (px, py) = path_dict[path]
                 tx = x + px
                 ty = y + py
-                if not b.solve_room(tx, ty):
-                    is_stuck = True
-                    continue
+                if b.is_valid(tx, ty):
+                    if b.util_solve_room(tx, ty):
+                        print ("sol_path", b.sol_path, "steps", b.steps)
+                        break
+                else:
+                    print("You are stuck!", "steps", b.steps)
+                    break
             else:
                 if b.walkroom(path):
-                    is_stuck = False
                     continue
                 else:
-                    is_stuck = True
+                    print("You are stuck!", "steps", b.steps)
                     break
-        if not is_stuck:
-            print ("sol_path", b.sol_path)
-        else:
-            print("You are stuck!", "steps", steps)
     else:
         print("please enter a valid input")
 else:
-    call_solve_room()
+    if b.util_solve_room(x, y):
+        print ("sol_path", b.sol_path, "steps", b.steps)
+    else:
+        print("You are stuck!", "steps", b.steps)
