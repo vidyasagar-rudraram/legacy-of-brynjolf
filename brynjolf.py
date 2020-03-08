@@ -1,4 +1,4 @@
-from util import revert_back, find_distance, path_dict
+from util import revert_back, path_dict
 
 
 class Brynjolf:
@@ -12,6 +12,7 @@ class Brynjolf:
         solution = [[0] * self.SIZE for _ in range(self.SIZE)]
         self.solution = solution
         self.steps = 0
+        self.executed = 0
         self.sol_path_list = []
         self.sol_path = ""
         self.inp_sol_path = ""
@@ -77,16 +78,10 @@ class Brynjolf:
             if destination E is reached, Brynjolf got out
             destination is the 'E'xit block
         '''
-        find_distance(self.brynjolf, self.exit)
-        if self.in_boundaries(sx, sy):
-            if self.room[sx][sy] == "E":
-                self.room[self.x][self.y] = 0
-                self.solution[sx][sy] = 2
-                self.printRoom()
-                self.printSolution()
-                return True
-        else:
-            return False
+        if self.room[sx][sy] == "E":
+            self.room[self.x][self.y] = 0
+            self.solution[sx][sy] = 2
+            return True
         '''
             checking if we can visit in this block or not
             the indices of the block must be in the boundaries (0, SIZE-1)
@@ -154,15 +149,10 @@ class Brynjolf:
             if destination E is reached, Brynjolf got out
             destination is the 'E'xit block
         '''
-        if self.in_boundaries(wx, wy):
-            if self.room[wx][wy] == "E":
-                self.room[self.x][self.y] = 0
-                self.solution[wx][wy] = 2
-                self.printRoom()
-                self.printSolution()
-                return True
-        else:
-            return False
+        if self.room[wx][wy] == "E":
+            self.room[self.x][self.y] = 0
+            self.solution[wx][wy] = 2
+            return True
         '''
             checking if we can visit in this block or not
             the indices of the block must be in the boundaries (0, SIZE-1)
@@ -178,7 +168,10 @@ class Brynjolf:
             self.room[wx][wy] = "B"
             self.inp_sol_path = self.inp_sol_path + path
             self.move_guard(px, py)
-            self.printRoom()
-            self.printSolution()
             return True
+        self.steps -= 1
+        self.solution[wx][wy] = 0
+        if len(self.inp_sol_path):
+            self.move_guard_back(self.inp_sol_path[-1])
+            self.move_brynjolf_back(self.inp_sol_path[-1])
         return 0

@@ -3,6 +3,8 @@ import sys
 from room import Room
 from brynjolf import Brynjolf, path_dict
 from util import short_distance
+from establishment import establishment
+from enlightenment import enlightenment
 
 try:
     filePath = sys.argv[1]
@@ -37,35 +39,34 @@ def print_solution():
 
 
 room = b.room
-print_room()
 
-path_string = input("Enter the path (Example: lrud): ")
-path_list = [i.lower() for i in list(path_string)]
+approaches = {1: establishment, 2: enlightenment}
 
-if (path_list and len(path_list) > 0):
-    if "l" in path_list or "r" in path_list or "u" in path_list or "d" in path_list:
-        for i, path in enumerate(path_list):
-            if i + 1 == len(path_list):
-                (px, py) = path_dict[path]
-                tx = x + px
-                ty = y + py
-                if b.util_solve_room(tx, ty):
-                    print ("uitl_solve_room sol_path", b.sol_path, "steps", b.steps)
-                    break
-                else:
-                    print("util_solve_room You are stuck!", "steps", b.steps)
-                    break
+run = True
+while run:
+    print ("\n-----------------------------------------")
+    print_room()
+    print ()
+    try:
+        choices = list(
+            map(
+                int, input(
+                    "Do you want to: \n\
+                    (1) Run Establishment \n\
+                    (2) Run Enlightenment\n\
+                    Or you can exit by typing 0\n").split()
+            )
+        )
+    except ValueError:
+        print("Please input number")
+        continue
+    for choice in choices:
+        if choice == 0:
+            run = False
+            print ("Quit!")
+        else:
+            if 0 < choice and choice < 3:
+                approaches[choice](b)
+                run = False
             else:
-                if b.walkroom(path):
-                    continue
-                else:
-                    print("walkroom You are stuck!", "steps", b.steps)
-                    break
-    else:
-        print("please enter a valid input")
-else:
-    # print(short_distance(b.brynjolf, b.exit))
-    if b.util_solve_room(x, y):
-        print ("sol_path", b.sol_path, "steps", b.steps)
-    else:
-        print("You are stuck!", "steps", b.steps)
+                print("That is not neither 1 nor 2! Try again:")
