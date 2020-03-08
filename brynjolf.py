@@ -1,10 +1,4 @@
-from util import revert_back
-
-
-l, u, r, d = (0, -1), (-1, 0), (0, 1), (1, 0)
-path_dict = {
-    "r": r, "l": l, "u": u, "d": d
-}
+from util import revert_back, find_distance, path_dict
 
 
 class Brynjolf:
@@ -83,6 +77,7 @@ class Brynjolf:
             if destination E is reached, Brynjolf got out
             destination is the 'E'xit block
         '''
+        find_distance(self.brynjolf, self.exit)
         if self.in_boundaries(sx, sy):
             if self.room[sx][sy] == "E":
                 self.room[self.x][self.y] = 0
@@ -183,5 +178,7 @@ class Brynjolf:
             self.room[wx][wy] = "B"
             self.inp_sol_path = self.inp_sol_path + path
             self.move_guard(px, py)
+            self.printRoom()
+            self.printSolution()
             return True
         return 0
