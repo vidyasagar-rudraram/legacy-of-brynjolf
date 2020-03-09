@@ -3,7 +3,7 @@
 
 To run/execute the program, type below command in the command line:
 ```
-$ python main.py < room.txt(optional file name) >
+$ python3 main.py < room.txt(optional file name) >
 ```
 If you provide a file name which is existing in the current path:
 - The input file which actually contains the blueprint of the Room containing the guards and exit (may be).
@@ -98,7 +98,7 @@ Here you can give any input to try it on your own to give an escape route to the
 
 ### Specifications
 This Brynjolf alogorithm uses:
-- Python version < 3 works for now
+- Python version 3
 - Recursion Algorithm used to find the path.
 - Brynjolf will cover the path to exit (E/O) in four directions named Left (l), Right (r), Up (u) or Down (d) until he hit a wall (X) or overlap any guard on his way (G) or he reaches end of the boundaries.
 - Accordingly the guards will also move in the same direction as **Brynjolf**.

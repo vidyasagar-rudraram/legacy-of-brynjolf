@@ -7,7 +7,7 @@ def establishment(b):
     run = True
     while run:
         try:
-            path_string = raw_input("Please Enter the path (Example: lrud): ")
+            path_string = input("Please Enter the path (Example: lrud): ")
         except ValueError:
             print("Please input only Directions in string format")
             continue
@@ -46,8 +46,3 @@ def establishment(b):
                 print("please enter a valid input")
         else:
             print ("You haven't provided any path!!")
-        #     # print(short_distance(b.brynjolf, b.exit))
-        #     if b.solve_room(x, y):
-        #         print ("sol_path", b.sol_path, "steps", b.steps)
-        #     else:
-        #         print("You are stuck!", "steps", b.steps)

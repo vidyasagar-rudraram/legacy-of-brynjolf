@@ -8,7 +8,7 @@ class Room:
 
     def __init__(self, filePath):
         while not os.path.exists(filePath):
-            filePath = raw_input("File doesn't exist in the path. Please try again with another file name: ")
+            filePath = input("File doesn't exist in the path. Please try again with another file name: ")
         room = []
 
         with open(filePath) as textFile:
@@ -28,7 +28,7 @@ class Room:
         brynjolf = find_character_index(self.room, "B")
         if len(brynjolf) > 0:
             return brynjolf[0]
-        print "Brynjolf was not in the Room"
+        print ("Brynjolf was not in the Room")
         sys.exit()
 
     def getGuards(self):
@@ -39,5 +39,5 @@ class Room:
         exit = find_character_index(self.room, "E")
         if len(exit) > 0:
             return exit[0]
-        print "There is no exit exist in the Room"
+        print ("There is no exit exist in the Room")
         sys.exit()

@@ -18,14 +18,14 @@ class Brynjolf:
         self.inp_sol_path = ""
 
     def printRoom(self):
-        print "Room:"
+        print ("Room:")
         for row in self.room:
-            print row
+            print (row)
 
     def printSolution(self):
-        print "Solution:"
+        print ("Solution:")
         for row in self.solution:
-            print row
+            print (row)
 
     def in_boundaries(self, x, y):
         if x >= 0 and y >= 0 and x < self.SIZE and y < self.SIZE:
