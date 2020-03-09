@@ -18,14 +18,14 @@ class Brynjolf:
         self.inp_sol_path = ""
 
     def printRoom(self):
-        print("Room:")
+        print "Room:"
         for row in self.room:
-            print(row)
+            print row
 
     def printSolution(self):
-        print("Solution:")
+        print "Solution:"
         for row in self.solution:
-            print(row)
+            print row
 
     def in_boundaries(self, x, y):
         if x >= 0 and y >= 0 and x < self.SIZE and y < self.SIZE:
@@ -89,7 +89,53 @@ class Brynjolf:
             self.room[sx][sy] == 0 is making sure that the block is not blocked
         '''
         if self.is_valid(sx, sy):
-            return self.util_solve_room(sx, sy)
+            self.steps += 1
+            self.solution[sx][sy] = 1
+            self.room[self.x][self.y] = 0
+            self.x, self.y = sx, sy
+            self.room[sx][sy] = "B"
+            # going right
+            self.move_guard(0, 1)
+            if self.solve_room(sx, sy + 1):
+                self.sol_path = 'r' + self.sol_path
+                return True
+            else:
+                if len(self.sol_path):
+                    self.move_guard_back(self.sol_path[-1])
+                    self.move_brynjolf_back(self.sol_path[-1])
+            # going left
+            self.move_guard(0, -1)
+            if self.solve_room(sx, sy - 1):
+                self.sol_path = 'l' + self.sol_path
+                return True
+            else:
+                if len(self.sol_path):
+                    self.move_guard_back(self.sol_path[-1])
+                    self.move_brynjolf_back(self.sol_path[-1])
+            # going up
+            self.move_guard(-1, 0)
+            if self.solve_room(sx - 1, sy):
+                self.sol_path = 'u' + self.sol_path
+                return True
+            else:
+                if len(self.sol_path):
+                    self.move_guard_back(self.sol_path[-1])
+                    self.move_brynjolf_back(self.sol_path[-1])
+            # going down
+            self.move_guard(1, 0)
+            if self.solve_room(sx + 1, sy):
+                self.sol_path = 'd' + self.sol_path
+                return True
+            else:
+                if len(self.sol_path):
+                    self.move_guard_back(self.sol_path[-1])
+                    self.move_brynjolf_back(self.sol_path[-1])
+            # backtracking
+            self.steps -= 1
+            self.solution[sx][sy] = 0
+            # self.room[self.x][self.y] = "B"
+            # self.room[sx][sy] = 0
+            return False
         return 0
 
     def util_solve_room(self, sx, sy):
@@ -152,13 +198,14 @@ class Brynjolf:
         if self.room[wx][wy] == "E":
             self.room[self.x][self.y] = 0
             self.solution[wx][wy] = 2
-            return True
+            return 0, True
         '''
             checking if we can visit in this block or not
             the indices of the block must be in the boundaries (0, SIZE-1)
             and solution[x][y] == 0 is making sure that the block is not already visited
             room[x][y] == 0 is making sure that the block is not blocked
         '''
+        self.inp_sol_path = self.inp_sol_path + path
         if self.is_valid(wx, wy):
             self.steps += 1
             # if safe to visit then visit the block
@@ -166,12 +213,11 @@ class Brynjolf:
             self.room[self.x][self.y] = 0
             self.x, self.y = wx, wy
             self.room[wx][wy] = "B"
-            self.inp_sol_path = self.inp_sol_path + path
             self.move_guard(px, py)
-            return True
-        self.steps -= 1
-        self.solution[wx][wy] = 0
-        if len(self.inp_sol_path):
+            return 0, True
+        else:
+            self.steps -= 1
+            self.solution[wx][wy] = 0
             self.move_guard_back(self.inp_sol_path[-1])
             self.move_brynjolf_back(self.inp_sol_path[-1])
-        return 0
+            return 0, 0
