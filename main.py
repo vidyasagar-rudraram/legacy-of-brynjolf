@@ -1,5 +1,6 @@
 # Brynjolf problem
 import sys
+import gc
 from room import Room
 from brynjolf import Brynjolf
 from establishment import establishment
@@ -16,12 +17,8 @@ except IndexError:
 r = Room(filePath)
 (x, y) = r.brynjolf
 b = Brynjolf(r.room, r.brynjolf, r.guards, r.exit)
-print ("brynjolf at: "), b.brynjolf
-print ("guards at: "), b.guards
-print ("exit at: "), b.exit
+
 solution = b.solution
-steps = b.steps
-sol_path = b.sol_path
 
 
 # initially the room
@@ -39,13 +36,11 @@ def print_solution():
 
 room = b.room
 
-approaches = {1: establishment, 2: enlightenment}
+approaches = {1: (establishment, "Establishment"), 2: (enlightenment, "Enlightenment")}
 
 run = True
 while run:
-    print ("\n-----------------------------------------")
     print_room()
-    print ()
     try:
         choices = list(
             map(
@@ -65,7 +60,10 @@ while run:
             print ("Quit!")
         else:
             if 0 < choice and choice < 3:
-                approaches[choice](b)
+                print("\n%d. %s it is then\n" % (choice, approaches[choice][1]))
+                approaches[choice][0](b)
                 run = False
             else:
                 print ("That is not neither 1 nor 2! Try again:")
+
+gc.collect()

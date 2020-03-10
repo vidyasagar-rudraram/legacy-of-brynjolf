@@ -102,3 +102,11 @@ This Brynjolf alogorithm uses:
 - Recursion Algorithm used to find the path.
 - Brynjolf will cover the path to exit (E/O) in four directions named Left (l), Right (r), Up (u) or Down (d) until he hit a wall (X) or overlap any guard on his way (G) or he reaches end of the boundaries.
 - Accordingly the guards will also move in the same direction as **Brynjolf**.
+
+### Requirements
+ * pytest
+    - Install it by typing following command:
+    ```
+    $ pip install -U pytest
+    ```
+ * python version 3
