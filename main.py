@@ -28,12 +28,6 @@ def print_room():
         print (m)
 
 
-def print_solution():
-    print ("Solution:")
-    for s in solution:
-        print (s)
-
-
 room = b.room
 
 approaches = {1: (establishment, "Establishment"), 2: (enlightenment, "Enlightenment")}

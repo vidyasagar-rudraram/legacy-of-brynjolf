@@ -37,17 +37,11 @@ class Brynjolf:
             return True
         return False
 
-    def move_guard_xy(self, gx, gy, x, y):
-        tgx, tgy = gx + x, gy + y
-        if self.is_valid(tgx, tgy):
-            return tgx, tgy
-        return gx, gy
-
     def move_guard(self, ax, ay):
         for i, g in enumerate(self.guards):
             gx, gy = g[0], g[1]
             self.room[gx][gy] = 0
-            tgx, tgy = self.move_guard_xy(gx, gy, ax, ay)
+            tgx, tgy = gx + ax, gy + ay
             if self.in_boundaries(tgx, tgy) and self.room[tgx][tgy] == 0:
                 gx, gy = tgx, tgy
                 self.room[gx][gy] = "G"

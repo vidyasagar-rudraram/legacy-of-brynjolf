@@ -112,6 +112,4 @@ This Brynjolf alogorithm uses:
  * python version 3
 
 #### To run pytest
-    ```
-    pytest test.py -s
-    ```
+    $ pytest test.py -s
