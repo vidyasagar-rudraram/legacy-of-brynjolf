@@ -110,3 +110,8 @@ This Brynjolf alogorithm uses:
     $ pip install -U pytest
     ```
  * python version 3
+
+#### To run pytest
+    ```
+    pytest test.py -s
+    ```
